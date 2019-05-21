@@ -33,7 +33,7 @@ public class SyntaxAnalyzer {
         return expression;
     }
 
-    public void parseFunctionDefinitionList() {
+    public void parseFunctionDefinitionList() throws SyntaxException {
         int j = 1;
         for (String funtion : functionDefinitionList) {
             int openRoundBracketInd = funtion.indexOf("(");
@@ -48,7 +48,7 @@ public class SyntaxAnalyzer {
         }
     }
 
-    public Expression parseExpression(String expression) {
+    public Expression parseExpression(String expression) throws SyntaxException {
         if (expression.matches("^[A-Za-z]+$")) {
             return new Identifier(expression);
         } else if (expression.matches("-{0,1}[0-9]+$")) {
@@ -60,7 +60,7 @@ public class SyntaxAnalyzer {
         } else if (expression.matches("^\\[.+\\]?\\{.*\\}:\\{.*\\}$")) {
             return parseIfExpression(expression);
         }
-        return null;
+        throw new SyntaxException();
     }
 
     private Expression parseConstantExpression(String expression) {
@@ -72,7 +72,7 @@ public class SyntaxAnalyzer {
         return new ConstantExpression(coeff * number);
     }
 
-    private Expression parseBinaryExpression(String expression) {
+    private Expression parseBinaryExpression(String expression) throws SyntaxException {
         char op = 'a';
         int roundBrackets = 0;
         int squareBrackets = 0;
@@ -104,10 +104,10 @@ public class SyntaxAnalyzer {
                 }
             }
         }
-        return null;
+        throw new SyntaxException();
     }
 
-    private Expression parseCallExpression(String expression) {
+    private Expression parseCallExpression(String expression) throws SyntaxException {
         CallExpression result = new CallExpression();
         int openBracketIndex = expression.indexOf("(");
         result.setFuncName(expression.substring(0, openBracketIndex));
@@ -118,7 +118,7 @@ public class SyntaxAnalyzer {
         return result;
     }
 
-    private Expression parseIfExpression(String expression) {
+    private Expression parseIfExpression(String expression) throws SyntaxException {
         int countSquareBrackets = 0;
         int closeSquareInd = 0;
         for (int i = 0; i < expression.length(); i++) {

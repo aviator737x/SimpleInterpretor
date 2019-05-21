@@ -1,16 +1,11 @@
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class SyntaxAnalyzerTest extends TestCase {
 
-    public void testParseFunctionDefinitionList() {
+    public void testParseFunctionDefinitionList() throws SyntaxException {
         SyntaxAnalyzer analyzer = new SyntaxAnalyzer();
         ArrayList<String> functions = new ArrayList<String>();
         functions.add("f\\(x\\)=\\{\\(x+1\\)\\}");
@@ -19,7 +14,7 @@ public class SyntaxAnalyzerTest extends TestCase {
         analyzer.parseFunctionDefinitionList();
     }
 
-    public void testParseExpression() {
+    public void testParseExpression() throws SyntaxException {
         SyntaxAnalyzer analyzer1 = new SyntaxAnalyzer();
         analyzer1.setExpression("(2+2)");
         Assert.assertTrue(analyzer1.parseExpression(analyzer1.getExpression()) instanceof BinaryExpression);
@@ -35,5 +30,13 @@ public class SyntaxAnalyzerTest extends TestCase {
         SyntaxAnalyzer analyzer5 = new SyntaxAnalyzer();
         analyzer5.setExpression("g(10)");
         Assert.assertTrue(analyzer5.parseExpression(analyzer5.getExpression()) instanceof CallExpression);
+        try {
+            SyntaxAnalyzer analyzer6 = new SyntaxAnalyzer();
+            analyzer6.setExpression("(2+2");
+            analyzer6.parseExpression(analyzer6.getExpression());
+            Assert.fail();
+        } catch (SyntaxException e) {
+            Assert.assertNull(e.getMessage());
+        }
     }
 }

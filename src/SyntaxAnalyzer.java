@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -33,7 +32,7 @@ public class SyntaxAnalyzer {
         return expression;
     }
 
-    public void parseFunctionDefinitionList() throws SyntaxException {
+    public void parseFunctionDefinitionList(Funtions funtions) throws SyntaxException {
         int j = 1;
         for (String funtion : functionDefinitionList) {
             int openRoundBracketInd = funtion.indexOf("(");
@@ -45,12 +44,18 @@ public class SyntaxAnalyzer {
                 parameters.add((Identifier) parseExpression(param));
             }
             Expression body = parseExpression(funtion.substring(closeRoundInd + 3, funtion.length() - 1));
+            Function functionToAdd = new Function();
+            functionToAdd.parameters = parameters;
+            functionToAdd.body = body;
+            functionToAdd.number = j;
+            j++;
+            funtions.addFunction(name, functionToAdd);
         }
     }
 
     public Expression parseExpression(String expression) throws SyntaxException {
         if (expression.matches("^[A-Za-z]+$")) {
-            return new Identifier(expression);
+            return new Identifier(expression, null);
         } else if (expression.matches("-{0,1}[0-9]+$")) {
             return parseConstantExpression(expression);
         } else if (expression.startsWith("(") && expression.endsWith(")")) {
@@ -162,4 +167,3 @@ public class SyntaxAnalyzer {
         this.expression = expression;
     }
 }
-

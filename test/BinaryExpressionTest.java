@@ -3,7 +3,7 @@ import junit.framework.TestCase;
 
 public class BinaryExpressionTest extends TestCase {
 
-    public void testEval() throws SyntaxException {
+    public void testEval() throws SyntaxException, FunctionNotFoundException, RuntimeException, ParameterNotFoundException, ArgumentNumberMismatch {
         SyntaxAnalyzer analyzer = new SyntaxAnalyzer();
         BinaryExpression expression = new BinaryExpression();
         expression.setLeftOperand(analyzer.parseExpression("2"));

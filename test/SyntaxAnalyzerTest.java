@@ -11,7 +11,7 @@ public class SyntaxAnalyzerTest extends TestCase {
         functions.add("f\\(x\\)=\\{\\(x+1\\)\\}");
         functions.add("g\\(x\\)=\\{\\(x+1\\)\\}");
         analyzer.setFunctionDefinitionList(functions);
-        analyzer.parseFunctionDefinitionList();
+        analyzer.parseFunctionDefinitionList(new Funtions());
     }
 
     public void testParseExpression() throws SyntaxException {

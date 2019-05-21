@@ -16,8 +16,7 @@ public class IfExpression extends Expression {
     }
 
     @Override
-    public int eval(Variables variables) {
+    public int eval(Variables variables) throws ParameterNotFoundException, FunctionNotFoundException, ArgumentNumberMismatch, RuntimeException {
         return expr1.eval(variables) != 0 ? expr2.eval(variables) : expr3.eval(variables);
     }
 }
-

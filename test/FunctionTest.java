@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class FunctionTest extends TestCase {
 
-    public void testRun() throws SyntaxException, ArgumentNumberMismatch {
+    public void testRun() throws SyntaxException, ArgumentNumberMismatch, RuntimeException, ParameterNotFoundException, FunctionNotFoundException {
         SyntaxAnalyzer analyzer = new SyntaxAnalyzer();
         Variables variables = new Variables();
         variables.setVar("x", 4);

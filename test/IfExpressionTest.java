@@ -3,7 +3,7 @@ import junit.framework.TestCase;
 
 public class IfExpressionTest extends TestCase {
 
-    public void testEval() throws SyntaxException {
+    public void testEval() throws SyntaxException, FunctionNotFoundException, RuntimeException, ParameterNotFoundException, ArgumentNumberMismatch {
         SyntaxAnalyzer analyzer = new SyntaxAnalyzer();
         BinaryExpression expression1 = (BinaryExpression) analyzer.parseExpression("(10>2)");
         ConstantExpression expression2 = (ConstantExpression) analyzer.parseExpression("3");

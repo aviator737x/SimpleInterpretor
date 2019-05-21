@@ -9,18 +9,18 @@ public class BinaryExpressionTest extends TestCase {
         expression.setLeftOperand(analyzer.parseExpression("2"));
         expression.setRightOperand(analyzer.parseExpression("2"));
         expression.setOperation('+');
-        Assert.assertEquals(expression.eval(), 4);
+        Assert.assertEquals(expression.eval(new Variables()), 4);
         expression.setOperation('-');
-        Assert.assertEquals(expression.eval(), 0);
+        Assert.assertEquals(expression.eval(new Variables()), 0);
         expression.setOperation('*');
-        Assert.assertEquals(expression.eval(), 4);
+        Assert.assertEquals(expression.eval(new Variables()), 4);
         expression.setOperation('/');
-        Assert.assertEquals(expression.eval(), 1);
+        Assert.assertEquals(expression.eval(new Variables()), 1);
         expression.setOperation('%');
-        Assert.assertEquals(expression.eval(), 0);
+        Assert.assertEquals(expression.eval(new Variables()), 0);
         expression.setOperation('<');
-        Assert.assertEquals(expression.eval(), 0);
+        Assert.assertEquals(expression.eval(new Variables()), 0);
         expression.setOperation('>');
-        Assert.assertEquals(expression.eval(), 0);
+        Assert.assertEquals(expression.eval(new Variables()), 0);
     }
 }

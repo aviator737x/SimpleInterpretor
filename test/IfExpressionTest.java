@@ -12,6 +12,6 @@ public class IfExpressionTest extends TestCase {
         expression.setExpr1(expression1);
         expression.setExpr2(expression2);
         expression.setExpr3(expression3);
-        Assert.assertEquals(expression.eval(), 3);
+        Assert.assertEquals(expression.eval(new Variables()), 3);
     }
 }

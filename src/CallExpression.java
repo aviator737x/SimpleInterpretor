@@ -13,7 +13,7 @@ public class CallExpression extends Expression {
     }
 
     @Override
-    public int eval() {
+    public int eval(Variables variables) {
         throw new UnsupportedOperationException();
     }
 }

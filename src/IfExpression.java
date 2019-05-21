@@ -16,8 +16,8 @@ public class IfExpression extends Expression {
     }
 
     @Override
-    public int eval() {
-        return expr1.eval() != 0 ? expr2.eval() : expr3.eval();
+    public int eval(Variables variables) {
+        return expr1.eval(variables) != 0 ? expr2.eval(variables) : expr3.eval(variables);
     }
 }
 

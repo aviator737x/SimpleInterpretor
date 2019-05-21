@@ -15,57 +15,61 @@ public class BinaryExpression extends Expression {
         this.operation = operation;
     }
 
-    private int sum() {
-        return leftOperand.eval() + rightOperand.eval();
+    private int sum(Variables variables) {
+        return leftOperand.eval(variables) + rightOperand.eval(variables);
     }
 
-    private int sub() {
-        return leftOperand.eval() - rightOperand.eval();
+    private int sub(Variables variables) {
+        return leftOperand.eval(variables) - rightOperand.eval(variables);
     }
 
-    private int mul() {
-        return leftOperand.eval() * rightOperand.eval();
+    private int mul(Variables variables) {
+        return leftOperand.eval(variables) * rightOperand.eval(variables);
     }
 
-    private int div() {
-        return leftOperand.eval() / rightOperand.eval();
+    private int div(Variables variables) {
+        return leftOperand.eval(variables) / rightOperand.eval(variables);
     }
 
-    private int mod() {
-        return leftOperand.eval() % rightOperand.eval();
+    private int mod(Variables variables) {
+        return leftOperand.eval(variables) % rightOperand.eval(variables);
     }
 
-    private int less() {
-        return leftOperand.eval() < rightOperand.eval() ? 1 : 0;
+    private int less(Variables variables) {
+        return leftOperand.eval(variables) < rightOperand.eval(variables) ? 1 : 0;
     }
 
-    private int more() {
-        return leftOperand.eval() > rightOperand.eval() ? 1 : 0;
+    private int more(Variables variables) {
+        return leftOperand.eval(variables) > rightOperand.eval(variables) ? 1 : 0;
     }
 
-    private int assign() {
-        throw new UnsupportedOperationException();
+    private int assign(Variables variables) {
+        if (!(leftOperand instanceof Identifier)) {
+            return 0;
+        }
+        variables.setVar(((Identifier) leftOperand).getName(), rightOperand.eval(variables));
+        return 1;
     }
 
     @Override
-    public int eval() {
+    public int eval(Variables variables) {
         switch (operation) {
             case '+':
-                return sum();
+                return sum(variables);
             case '-':
-                return sub();
+                return sub(variables);
             case '*':
-                return mul();
+                return mul(variables);
             case '/':
-                return div();
+                return div(variables);
             case '%':
-                return mod();
+                return mod(variables);
             case '<':
-                return less();
+                return less(variables);
             case '>':
-                return more();
+                return more(variables);
             case '=':
-                return assign();
+                return assign(variables);
             default:
                 return 0;
         }

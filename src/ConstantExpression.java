@@ -10,7 +10,7 @@ public class ConstantExpression extends Expression {
     }
 
     @Override
-    public int eval() {
+    public int eval(Variables variables) {
         return value;
     }
 }

@@ -5,6 +5,6 @@ public class ConstantExpressionTest extends TestCase {
 
     public void testEval() {
         ConstantExpression expression = new ConstantExpression(2);
-        Assert.assertEquals(expression.eval(), 2);
+        Assert.assertEquals(expression.eval(new Variables()), 2);
     }
 }

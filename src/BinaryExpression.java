@@ -79,7 +79,7 @@ public class BinaryExpression extends Expression {
                     ((Identifier) leftOperand).getName() : String.valueOf(leftOperand.eval(variables));
             String right = (rightOperand instanceof Identifier) ?
                     ((Identifier) rightOperand).getName() : String.valueOf(rightOperand.eval(variables));
-            throw new RuntimeException("RUNTIME ERROR " + left + operation + right + ":");
+            throw new RuntimeException("RUNTIME ERROR (" + left + operation + right + "):");
         }
     }
 }

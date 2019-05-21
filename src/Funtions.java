@@ -24,7 +24,11 @@ public class Funtions {
                 throw e;
             }
         } catch (ArgumentNumberMismatch e) {
-            throw new ArgumentNumberMismatch(e.getMessage() + name + ":" + funcs.get(name).number);
+            if (e.getMessage().endsWith(" "))
+                throw new ArgumentNumberMismatch(e.getMessage() + name + ":");
+            else if (e.getMessage().endsWith(":"))
+                throw new ArgumentNumberMismatch(e.getMessage() + funcs.get(name).number);
+            throw e;
         } catch (RuntimeException e) {
             if (e.getMessage().endsWith(":"))
                 throw new RuntimeException(e.getMessage() + funcs.get(name).number);
